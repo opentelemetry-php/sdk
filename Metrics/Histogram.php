@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace OpenTelemetry\SDK\Metrics;
 
-use OpenTelemetry\API\Metrics\UpDownCounterInterface;
+use OpenTelemetry\API\Metrics\HistogramInterface;
 use OpenTelemetry\SDK\Common\Time\ClockInterface;
 
 /**
  * @internal
  */
-final class UpDownCounter implements UpDownCounterInterface
+final class Histogram implements HistogramInterface
 {
     private MetricWriterInterface $writer;
     private ReferenceCounterInterface $referenceCounter;
@@ -30,7 +30,7 @@ final class UpDownCounter implements UpDownCounterInterface
         $this->referenceCounter->release();
     }
 
-    public function add($amount, iterable $attributes = [], $context = null): void
+    public function record($amount, iterable $attributes = [], $context = null): void
     {
         $this->writer->record($amount, $attributes, $context, $this->clock->now());
     }
