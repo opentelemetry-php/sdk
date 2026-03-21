@@ -70,6 +70,7 @@ final class StackTraceFormatter
      * @psalm-param Frames $frames
      * @phan-suppress-next-line PhanTypeMismatchDeclaredParam
      * @psalm-param Frames|null $enclosing
+     * @psalm-suppress InvalidArrayOffset
      */
     private static function writeFrames(string &$s, array $frames, ?array $enclosing): void
     {
